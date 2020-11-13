@@ -140,9 +140,10 @@ results[j]=bank
 }
 hist(results)
 ```
-# Confidence interval of Brownlows earning
+# Confidence interval of Brownlows earning  .
 
 <!--Explain and display your method of coming up with a 95% confidence interval of  professor Brownlows winnings (or losings)-->
+
 
 
 We have been using Histograms to determine the 95% confidence interval, by changing the amount of students we can also determine if it is a fair bet or not.  
