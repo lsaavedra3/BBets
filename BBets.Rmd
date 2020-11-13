@@ -1,7 +1,7 @@
 ---
 title: "Brownlows Bets"
-author: "Your Name"
-date: "Year 2020"
+author: "Lelainy Saavedra"
+date: "November 12, 2020"
 output: 
   html_document:
     number_sections: true
@@ -11,7 +11,7 @@ output:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 require(tidyverse)
-require(tidyverse)
+require(tigerstats)
 require(knitr)
 ```
 ### `r as.character(Sys.Date())`
@@ -25,6 +25,38 @@ require(knitr)
 <!--In this section you explain what you are trying to show.  Where did the data come from?  What is the research or other question you are trying to answer?!-->
 
  At the first day of class there are 35 students in Math Statistics class and professor Brownlow always proposes this bet to his students "I will wager $2 to your bet of $1 that at least two people in today's class have  the same birthday.  He tells me he has made that bet 637 times so far. Where do you think his profits are? Discuss this in a markdown document
+he has now $637.
+
+This criterion is linked to a Learning OutcomeReport git commit structure
+There are 3 questions and there should be at least 3 separate commits, at least one dealing with each of the 3 questions.
+1. What are the fair odds for a bet on matching birthdays in a 35 person class.
+2. For what size class is a 2:1 odds bet fair.
+3. How much money would Brownlow be expected to end up with if the bets went as described.
+We will solve this problem by re-sampling.    
+we will set up days of the year,pick a random sample of 35, and see if two or more have the same birthday.  
+
+```{r}
+daysYEAR=1:365
+bDAYS=sample(daysYEAR,35,replace=TRUE)
+length(unique(bDAYS))
+```
+```{r}
+results=vector("numeric")
+for(j in 1:1000){
+  
+
+bank=0
+for(i in 1:637){
+class=sample(daysYEAR,35,replace=TRUE) 
+n=length(unique(class))
+if(n == 35)bank=bank-2
+else bank=bank +1
+}
+results[j]=bank
+}
+hist(results)
+```
+
 
 # Methods
 
@@ -32,6 +64,11 @@ require(knitr)
 
 
 # Profit Estimate
+```{r}
+favstats(results)
+```
+The expected amount of money is `r mean(results)`
+
 
 <!--Explain and display the results of your method of coming up with the estimate of professor Brownlows betting profits!-->
 
